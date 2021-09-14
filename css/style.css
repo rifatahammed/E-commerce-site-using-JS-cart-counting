@@ -25,6 +25,7 @@ body {
   border-radius: 25px;
   margin-left: 20px;
 }
+
 #all-products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -38,11 +39,14 @@ body {
 .single-product {
   padding: 10px;
   transition: 0.6s;
+  border-radius: 10px;
+  border: 10px solid rgb(59, 62, 65);
+  height: 500px;
 }
 .single-product:hover {
-  box-shadow: 4px 4px 7px gray;
   border-radius: 10px;
-  border: 1px solid cyan;
+  border: 10px solid rgb(252, 100, 13);
+  box-shadow: 20px 20px 40px gray;
 }
 .product-image {
   width: 150px;
@@ -60,6 +64,64 @@ body {
 .cart-main {
   padding-right: 30px;
 }
+.checked {
+  color: orange;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  font-weight: normal;
+  font-size: 18px;
+  color: #000000;
+}
+/* ------------------------------------------
+                  detailed modal start
+ ---------------------------------------------------*/
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* ------------------------------------------
+                  detailed modal end
+ ---------------------------------------------------*/
+
 @media only screen and (max-width: 768px) {
   #all-products {
     display: grid;

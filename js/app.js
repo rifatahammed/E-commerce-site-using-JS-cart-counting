@@ -210,7 +210,7 @@ const loadProducts = () => {
   showProducts(data);
 };
 
-// show all product in UI
+// show all product in UI--------------------------------
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
@@ -219,19 +219,30 @@ const showProducts = (products) => {
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
       <div>
-    <img class="product-image" src=${image}></img>
+        <img class="product-image" src=${image}></img>
       </div>
-      <h3>${product.title}</h3>
+      <h5>${product.title}</h5>
       <p>Category: ${product.category}</p>
-      <p>Review count: ${product.rating.count}</p>
-      <p>AVG Rating: ${product.rating.rate}</p>
+      <p class="text-success">Review count: ${product.rating.count}</p>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <p class="fw-bold">AVG Rating: ${product.rating.rate}</p>
       <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
-      `;
+      <button onclick="addToCart(${product.id},${
+      product.price
+    })" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
+      <button onclick="showModal(${
+        (product.title, product.rating.rate, product.price)
+      })"  id="myBtn" class="btn btn-danger myBtn" >Details</button>
+      </div>`;
     document.getElementById("all-products").appendChild(div);
   }
 };
+
+//cart count segment---------------------------
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
@@ -241,6 +252,7 @@ const addToCart = (id, price) => {
   document.getElementById("total-Products").innerText = count;
 };
 
+//func for getting the input value
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
   const converted = parseFloat(element);
@@ -252,7 +264,7 @@ const updatePrice = (id, value) => {
   const convertedOldPrice = getInputValue(id);
   const convertPrice = parseFloat(value);
   const total = convertedOldPrice + convertPrice;
-  document.getElementById(id).innerText = total;
+  document.getElementById(id).innerText = total.toFixed(2);
 };
 
 // set innerText function
@@ -275,6 +287,7 @@ const updateTaxAndCharge = () => {
     setInnerText("delivery-charge", 60);
     setInnerText("total-tax", priceConverted * 0.4);
   }
+  updateTotal();
 };
 
 //grandTotal update function
@@ -283,6 +296,30 @@ const updateTotal = () => {
     getInputValue("price") +
     getInputValue("delivery-charge") +
     getInputValue("total-tax");
-  document.getElementById("total").innerText = grandTotal;
+  document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
 loadProducts();
+updateTotal();
+
+// the detailed modal--------------------------------------------start
+const showModal = (title, rate, price) => {
+  document.getElementById("lastmodal-title").innerText = title;
+  document.getElementById("lastmodal-rate").innerText = rate;
+  document.getElementById("lastmodal-price").innerText = price;
+  var modal = document.getElementById("myModal");
+
+  var span = document.getElementById("close");
+
+  modal.style.display = "block";
+
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+};
+// the detailed modal--------------------------------------------end
